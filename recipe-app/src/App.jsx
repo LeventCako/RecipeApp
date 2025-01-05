@@ -3,9 +3,14 @@ import { useState } from 'react'
 
 function App() {
  
-  const [recipe, setRecipe] = useState(0);
-
   return(<>
+  <h1>Recipe App</h1>
+
+  <div>
+    <div className='recipeBox'>
+       
+    </div>
+  </div>
   </>)
 }
 
