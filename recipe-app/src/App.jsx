@@ -5,12 +5,6 @@ function App() {
  
   return(<>
   <h1>Recipe App</h1>
-
-  <div>
-    <div className='recipeBox'>
-       
-    </div>
-  </div>
   </>)
 }
 
