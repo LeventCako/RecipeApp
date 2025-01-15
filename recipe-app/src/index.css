@@ -1,3 +1,7 @@
 body {
     height: 3000px;
+    -webkit-user-select: none; /* Safari, Chrome */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE, Edge */
+    user-select: none; /* Standard syntax */
 }

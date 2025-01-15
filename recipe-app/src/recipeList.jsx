@@ -25,7 +25,11 @@ function RecipeList({ onSelectRecipe }) {
     const [selectedRecipe, setSelectedRecipe] = useState(null);
 
     const handleRecipeClick = (recipe) => {
-        setSelectedRecipe(recipe);
+        if(selectedRecipe && selectedRecipe.id === recipe.id) {
+            setSelectedRecipe(null);
+        } else {
+            setSelectedRecipe(recipe);
+        }
     }
 
 
