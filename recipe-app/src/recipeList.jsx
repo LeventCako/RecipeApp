@@ -19,7 +19,7 @@ function RecipeList({ onSelectRecipe }) {
             id: 3,
             name: "Muffins",
             ingredients: ["190g flour", "150g sugar", " 2tsp bakiung powder", "1 egg", "1tsp vanila extract", "80ml Milk"],
-            instructions: ["Step 5", "Step 6"],
+            instructions: ["Step 5", "Step 6", "Step 7", "Step 8", "Step 9", "Step 10"]
         }
     ];
     const [selectedRecipe, setSelectedRecipe] = useState(null);
@@ -44,6 +44,13 @@ function RecipeList({ onSelectRecipe }) {
                             <h3>Ingredients:</h3>
                             <ul> {selectedRecipe.ingredients.map((ingredient, index) => (
                                 <li key={index}>{ingredient}</li>))}
+                               
+                            </ul>
+                            <h4>Steps:</h4>
+                            <ul>
+                                {selectedRecipe.instructions.map((instruction, index) =>(
+                                    <li key={index}>{instruction}</li>
+                                ))}
                             </ul>
                         </div>)}
                 </div>
