@@ -5,7 +5,7 @@ import FavoriteRecipes from './favoriteRecipes.jsx'
 function App() {
  
   return(<>
-  <h1>Recipe App</h1>
+  
   <RecipeList></RecipeList>
   <FavoriteRecipes></FavoriteRecipes>
   </>)

@@ -25,7 +25,7 @@ function RecipeList({ onSelectRecipe }) {
     const [selectedRecipe, setSelectedRecipe] = useState(null);
 
     const handleRecipeClick = (recipe) => {
-        if(selectedRecipe && selectedRecipe.id === recipe.id) {
+        if (selectedRecipe && selectedRecipe.id === recipe.id) {
             setSelectedRecipe(null);
         } else {
             setSelectedRecipe(recipe);
@@ -34,32 +34,39 @@ function RecipeList({ onSelectRecipe }) {
 
 
 
-        return (
-            <>
-                <div className="App">
-                    <ul> {recipes.map(recipe => (
-                        <li key={recipe.id}
-                            onClick={() => handleRecipeClick(recipe)}>
-                            {recipe.name}
-                        </li>))}
-                    </ul> {selectedRecipe && (
-                        <div>
-                            <h2>{selectedRecipe.name}</h2>
-                            <h3>Ingredients:</h3>
-                            <ul> {selectedRecipe.ingredients.map((ingredient, index) => (
-                                <li key={index}>{ingredient}</li>))}
-                               
-                            </ul>
-                            <h4>Steps:</h4>
-                            <ul>
-                                {selectedRecipe.instructions.map((instruction, index) =>(
-                                    <li key={index}>{instruction}</li>
-                                ))}
-                            </ul>
-                        </div>)}
-                </div>
-            </>
-        );
-    }
+    return (
+        <>
+
+            <header className="Header">
+                <button className="FavoritesList" title="Favorites">🖤</button>
+            </header>
+            <div className="App">
+
+                <h1>Recipe App</h1>
+                <ul> {recipes.map(recipe => (
+                    <li key={recipe.id}
+                        onClick={() => handleRecipeClick(recipe)}>
+                        {recipe.name}
+                        <button className="FavoriteBtn"><span>👍</span></button>
+                    </li>))}
+                </ul> {selectedRecipe && (
+                    <div>
+                        <h2>{selectedRecipe.name}</h2>
+                        <h3>Ingredients:</h3>
+                        <ul> {selectedRecipe.ingredients.map((ingredient, index) => (
+                            <li key={index}>{ingredient}</li>))}
+
+                        </ul>
+                        <h4>Steps:</h4>
+                        <ul>
+                            {selectedRecipe.instructions.map((instruction, index) => (
+                                <li key={index}>{instruction}</li>
+                            ))}
+                        </ul>
+                    </div>)}
+            </div>
+        </>
+    );
+}
 
 export default RecipeList;
