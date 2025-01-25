@@ -38,13 +38,16 @@ function RecipeList({ onSelectRecipe }) {
         <>
 
             <header className="Header">
-                <button className="FavoritesList" title="Favorites">🖤</button>
+                <div className="HeaderItems">
+                    <button className="FavoritesList" title="Favorites">🖤</button>
+                </div>
+
             </header>
             <div className="App">
 
                 <h1>Recipe App</h1>
                 <ul> {recipes.map(recipe => (
-                    <li key={recipe.id}
+                    <li className="recipe-item" key={recipe.id}
                         onClick={() => handleRecipeClick(recipe)}>
                         {recipe.name}
                         <button className="FavoriteBtn"><span>👍</span></button>
