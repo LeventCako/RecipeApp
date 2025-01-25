@@ -1,5 +1,6 @@
 import { useState } from "react";
 import React from "react";
+import Searchbar from "./Searchbar";
 
 function RecipeList({ onSelectRecipe }) {
     const recipes = [
@@ -22,7 +23,11 @@ function RecipeList({ onSelectRecipe }) {
             instructions: ["Step 5", "Step 6", "Step 7", "Step 8", "Step 9", "Step 10"]
         }
     ];
+
+
     const [selectedRecipe, setSelectedRecipe] = useState(null);
+    const [filteredRecipes, setFilteredRecipes] = useState(recipes); // Initial state with all recipes
+    const [favorites, setFavorites] = useState([]);
 
     const handleRecipeClick = (recipe) => {
         if (selectedRecipe && selectedRecipe.id === recipe.id) {
@@ -30,35 +35,60 @@ function RecipeList({ onSelectRecipe }) {
         } else {
             setSelectedRecipe(recipe);
         }
-    }
+    };
 
+    const toggleFavorite = (recipe) => {
+        if (favorites.some(fav => fav.id === recipe.id)) {
+            setFavorites(favorites.filter(fav => fav.id !== recipe.id));
+        } else {
+            setFavorites([...favorites, recipe]);
+        }
+    };
 
+    const handleFilterRecipes = (searchTerm) => {
+        const newFilteredRecipes = recipes.filter(recipe =>
+            recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredRecipes(newFilteredRecipes); // Update filtered recipes state
+        setSelectedRecipe(null); // Reset the selected recipe
+    };
 
     return (
         <>
-
             <header className="Header">
                 <div className="HeaderItems">
-                    <button className="FavoritesList" title="Favorites">🖤</button>
+                    <Searchbar onFilterRecipes={handleFilterRecipes} />
+                    
                 </div>
-
             </header>
             <div className="App">
-
                 <h1>Recipe App</h1>
-                <ul> {recipes.map(recipe => (
-                    <li className="recipe-item" key={recipe.id}
-                        onClick={() => handleRecipeClick(recipe)}>
-                        {recipe.name}
-                        <button className="FavoriteBtn"><span>👍</span></button>
-                    </li>))}
-                </ul> {selectedRecipe && (
+                <h2 className="favorites">Favorites:</h2>
+                <ul className="favoriteRecipes">
+                    {favorites.map(fav => (
+                        <li key={fav.id}>{fav.name}</li>
+                    ))}
+                </ul>
+                <h2>All Recipes:</h2>
+                <ul>
+                    {filteredRecipes.map(recipe => (
+                        <li className="recipe-item" key={recipe.id}
+                            onClick={() => handleRecipeClick(recipe)}>
+                            {recipe.name}
+                            <button className="FavoriteBtn" onClick={() => toggleFavorite(recipe)}>
+                                {favorites.some(fav => fav.id === recipe.id) ? "💔" : "❤️"}
+                            </button>
+                        </li>
+                    ))}
+                </ul>
+                {selectedRecipe && (
                     <div>
                         <h2>{selectedRecipe.name}</h2>
                         <h3>Ingredients:</h3>
-                        <ul> {selectedRecipe.ingredients.map((ingredient, index) => (
-                            <li key={index}>{ingredient}</li>))}
-
+                        <ul>
+                            {selectedRecipe.ingredients.map((ingredient, index) => (
+                                <li key={index}>{ingredient}</li>
+                            ))}
                         </ul>
                         <h4>Steps:</h4>
                         <ul>
@@ -66,10 +96,11 @@ function RecipeList({ onSelectRecipe }) {
                                 <li key={index}>{instruction}</li>
                             ))}
                         </ul>
-                    </div>)}
+                    </div>
+                )}
             </div>
         </>
     );
 }
 
-export default RecipeList;
+export default RecipeList

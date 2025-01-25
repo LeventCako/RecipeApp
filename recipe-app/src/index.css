@@ -42,12 +42,13 @@ body {
 /* Change the position of the FavoriteList Btn to the right */
 .HeaderItems{
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    margin-top: 5%;
 }
 
-.FavoritesList{
-    margin-top: 8%;
-}
+
 .App{
     padding:80px;
     margin-left: -50px;
@@ -57,4 +58,29 @@ body {
 
 .recipe-item {
     display: inline;
+
+}
+
+
+.Searchbar {
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+   
+}
+
+.favorites{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 25px;
+    
+    
+}
+
+.favoriteRecipes{
+  
+    display: flex;
+    justify-content: flex-end;
 }

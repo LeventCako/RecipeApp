@@ -7,7 +7,7 @@ function App() {
   return(<>
   
   <RecipeList></RecipeList>
- <Searchbar></Searchbar>
+
   </>)
 }
 
