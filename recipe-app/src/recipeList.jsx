@@ -21,6 +21,12 @@ function RecipeList({ onSelectRecipe }) {
             name: "Muffins",
             ingredients: ["190g flour", "150g sugar", " 2tsp bakiung powder", "1 egg", "1tsp vanila extract", "80ml Milk"],
             instructions: ["Step 5", "Step 6", "Step 7", "Step 8", "Step 9", "Step 10"]
+        },
+        {
+            id: 4,
+            name: "Cookies",
+            ingredients: ["200g butter", " 200g sugar", " 2 eggs"],
+            instructions: ["Step 11", "Step 12"]
         }
     ];
 
@@ -53,6 +59,12 @@ function RecipeList({ onSelectRecipe }) {
         setSelectedRecipe(null); // Reset the selected recipe
     };
 
+
+    function deleteFavorite(itemId) {
+        // Filter out the item with the given id from the favorites list
+        setFavorites(favorites.filter(fav => fav.id !== itemId));
+       
+    }
     return (
         <>
             <header className="Header">
@@ -66,8 +78,11 @@ function RecipeList({ onSelectRecipe }) {
                 <h2 className="favorites">Favorites:</h2>
                 <ul className="favoriteRecipes">
                     {favorites.map(fav => (
-                        <li key={fav.id}>{fav.name}</li>
+                        <li key={fav.id}>{fav.name}
+                         <button onClick={() => deleteFavorite(fav.id)}  >X</button></li>
+                        
                     ))}
+                    
                 </ul>
                 <h2>All Recipes:</h2>
                 <ul>
