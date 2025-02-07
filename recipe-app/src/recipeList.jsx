@@ -27,6 +27,13 @@ function RecipeList({ onSelectRecipe }) {
             name: "Cookies",
             ingredients: ["200g butter", " 200g sugar", " 2 eggs"],
             instructions: ["Step 11", "Step 12"]
+        },
+        {
+            id: 5,
+            name: "Donuts",
+            ingredients: ["200g flour", " 200g sugar", " 2 eggs"],
+            instructions: ["Step 13", "Step 14"]
+
         }
     ];
 

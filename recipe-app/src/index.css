@@ -5,6 +5,9 @@ body {
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE, Edge */
     user-select: none; /* Standard syntax */
+    
+        background-color: var(--background-color);
+        color: var(--text-color);
 }
 
 .FavoriteBtn {
@@ -85,4 +88,32 @@ body {
     display: block;
     margin-left: 60%;
     
+}
+
+
+.lightMode {
+    --background-color: white;
+    --text-color: black;
+}
+
+
+.darkMode {
+    --background-color: #000000;
+    --text-color: #ffffff;
+}
+
+.ThemeBtn {
+    position: absolute;
+    top: 10px;
+    position:fixed;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+}
+
+.ThemeBtn:hover{
+    background-color: #717271;
+    transition: 0.6s;
+    color: white;
+    box-shadow: 1px 2px black;
 }
