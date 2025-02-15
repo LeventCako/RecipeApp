@@ -3,8 +3,9 @@ import React, { useState, useEffect } from "react";
 function Darkmode() {
 
 
-
-    const [mode, setMode] = useState(true)
+    /* True = start with Dark
+       False = start with Light */
+    const [mode, setMode] = useState(false)
 
     function toggleMode() {
         setMode(!mode)
@@ -14,12 +15,13 @@ function Darkmode() {
 
     useEffect(() => {
         document.body.className = mode ? 'darkMode' : 'lightMode';
+        console.log("Mode has changed")
     }, [mode]);
     return (
         <>
             <div className={mode ? 'darkMode' : 'lightMode'}>
-                <button className="ThemeBtn" 
-                onClick={mode ? toggleMode : toggleMode}>
+                <button className="ThemeBtn"
+                    onClick={mode ? toggleMode : toggleMode}>
                     {mode ? "Lightmode" : "Darkmode"}
                 </button>
                 {/* Rest of your app */}

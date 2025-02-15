@@ -1,42 +1,9 @@
 import { useState } from "react";
 import React from "react";
 import Searchbar from "./Searchbar";
-
+import recipes from './recipeData.jsx'
 function RecipeList({ onSelectRecipe }) {
-    const recipes = [
-        {
-            id: 1,
-            name: "Chocolate Cake",
-            ingredients: ["200 gr Chocolate", "1l Milk", "2 Eggs", "1 tsp Vanilla", "1 tsp Sugar", "1 tsp Flour", "1 tsp Baking Powder", "1 tsp Salt", "1 tsp Baking Soda", "1 tsp Cinnamon"],
-            instructions: ["Step 1", "Step 2"],
-        },
-        {
-            id: 2,
-            name: "Pancakes",
-            ingredients: ["125g flour", " 2 tsp sugar", " 1/2 tsp salt", "2 tsp baking powder", "1 egg", "180ml Milk"],
-            instructions: ["Step 3", "Step 4"],
-        },
-        {
-            id: 3,
-            name: "Muffins",
-            ingredients: ["190g flour", "150g sugar", " 2tsp bakiung powder", "1 egg", "1tsp vanila extract", "80ml Milk"],
-            instructions: ["Step 5", "Step 6", "Step 7", "Step 8", "Step 9", "Step 10"]
-        },
-        {
-            id: 4,
-            name: "Cookies",
-            ingredients: ["200g butter", " 200g sugar", " 2 eggs"],
-            instructions: ["Step 11", "Step 12"]
-        },
-        {
-            id: 5,
-            name: "Donuts",
-            ingredients: ["200g flour", " 200g sugar", " 2 eggs"],
-            instructions: ["Step 13", "Step 14"]
-
-        }
-    ];
-
+   
 
     const [selectedRecipe, setSelectedRecipe] = useState(null);
     const [filteredRecipes, setFilteredRecipes] = useState(recipes); // Initial state with all recipes
@@ -74,6 +41,7 @@ function RecipeList({ onSelectRecipe }) {
     }
     return (
         <>
+       
             <header className="Header">
                 <div className="HeaderItems">
                     <Searchbar onFilterRecipes={handleFilterRecipes} />
