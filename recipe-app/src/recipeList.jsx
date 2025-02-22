@@ -2,12 +2,14 @@ import { useState } from "react";
 import React from "react";
 import Searchbar from "./Searchbar";
 import recipes from './recipeData.jsx'
+
 function RecipeList({ onSelectRecipe }) {
    
 
     const [selectedRecipe, setSelectedRecipe] = useState(null);
     const [filteredRecipes, setFilteredRecipes] = useState(recipes); // Initial state with all recipes
     const [favorites, setFavorites] = useState([]);
+    const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
 
     const handleRecipeClick = (recipe) => {
         if (selectedRecipe && selectedRecipe.id === recipe.id) {
@@ -39,6 +41,11 @@ function RecipeList({ onSelectRecipe }) {
         setFavorites(favorites.filter(fav => fav.id !== itemId));
        
     }
+
+
+    function openFavorites() {
+        setIsFavoritesOpen(!isFavoritesOpen);
+    }
     return (
         <>
        
@@ -47,10 +54,14 @@ function RecipeList({ onSelectRecipe }) {
                     <Searchbar onFilterRecipes={handleFilterRecipes} />
                     
                 </div>
+                <div>
+                <h2 className="favorites" title="Favorites" onClick={openFavorites}>💟</h2>
+                </div>
+               
             </header>
             <div className="App">
                 <h1>Recipe App</h1>
-                <h2 className="favorites">Favorites:</h2>
+                <div className={`favorites-box ${isFavoritesOpen ? 'show' : ''}`}>
                 <ul className="favoriteRecipes">
                     {favorites.map(fav => (
                         <li key={fav.id}>{fav.name}
@@ -59,6 +70,10 @@ function RecipeList({ onSelectRecipe }) {
                     ))}
                     
                 </ul>
+                </div>
+               
+                
+                
                 <h2>All Recipes:</h2>
                 <ul>
                     {filteredRecipes.map(recipe => (

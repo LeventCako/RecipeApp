@@ -79,19 +79,31 @@ body {
 .favorites{
     display: flex;
    
-  
-    margin-left: 60%;
+    align-items: center;
+    justify-content: end;
+   margin-top: -7%;
     
     
 }
-
-.favoriteRecipes{
+.favorites-box {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
   
+  .favorites-box.show {
     display: block;
-    margin-left: 60%;
-    
-}
-
+  }
+  
 
 .lightMode {
     --background-color: white;
