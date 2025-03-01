@@ -1,7 +1,8 @@
 import { useState } from "react";
 import React from "react";
 import Searchbar from "./Searchbar";
-import recipes from './recipeData.jsx'
+import recipes from './recipeData.jsx';
+import { useRef } from "react";
 
 function RecipeList({ onSelectRecipe }) {
    
@@ -10,12 +11,14 @@ function RecipeList({ onSelectRecipe }) {
     const [filteredRecipes, setFilteredRecipes] = useState(recipes); // Initial state with all recipes
     const [favorites, setFavorites] = useState([]);
     const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
+    const myRef = useRef(null);
 
     const handleRecipeClick = (recipe) => {
         if (selectedRecipe && selectedRecipe.id === recipe.id) {
             setSelectedRecipe(null);
         } else {
             setSelectedRecipe(recipe);
+            setTimeout(scrollToRecipeIngredients, 100);
         }
     };
 
@@ -42,10 +45,26 @@ function RecipeList({ onSelectRecipe }) {
        
     }
 
+    function deleteAllFavorite() {
+        setFavorites([]);
+    }
+
 
     function openFavorites() {
         setIsFavoritesOpen(!isFavoritesOpen);
     }
+
+    
+       
+    
+
+    const scrollToRecipeIngredients = () => {
+        if(myRef.current) {
+            myRef.current.scrollIntoView({ behavior: 'smooth' });
+        } 
+       
+    }
+
     return (
         <>
        
@@ -62,10 +81,11 @@ function RecipeList({ onSelectRecipe }) {
             <div className="App">
                 <h1>Recipe App</h1>
                 <div className={`favorites-box ${isFavoritesOpen ? 'show' : ''}`}>
+                    <button onClick={deleteAllFavorite}>Delete All</button>
                 <ul className="favoriteRecipes">
                     {favorites.map(fav => (
                         <li key={fav.id}>{fav.name}
-                         <button onClick={() => deleteFavorite(fav.id)}  >X</button></li>
+                         <button className="deleteBtnFav" onClick={() => deleteFavorite(fav.id)}  >X</button></li>
                         
                     ))}
                     
@@ -80,14 +100,18 @@ function RecipeList({ onSelectRecipe }) {
                         <li className="recipe-item" key={recipe.id}
                             onClick={() => handleRecipeClick(recipe)}>
                             {recipe.name}
+                           
                             <button className="FavoriteBtn" onClick={() => toggleFavorite(recipe)}>
                                 {favorites.some(fav => fav.id === recipe.id) ? "💔" : "❤️"}
                             </button>
+                            
                         </li>
+                        
                     ))}
+                     
                 </ul>
                 {selectedRecipe && (
-                    <div>
+                    <div ref={myRef}>
                         <h2>{selectedRecipe.name}</h2>
                         <h3>Ingredients:</h3>
                         <ul>
