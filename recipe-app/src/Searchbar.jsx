@@ -11,6 +11,13 @@ function Searchbar({onFilterRecipes}) {
     }
 
 
+    const deleteSearchBtn = (e) => {
+        const newSearchTerm = e.target.value;
+     setSearchTerm("");
+     setSearchTerm(newSearchTerm);
+        onFilterRecipes(newSearchTerm);
+    }
+
     return (
 
         <div className="Searchbar">
@@ -18,7 +25,9 @@ function Searchbar({onFilterRecipes}) {
                 type="text"
                 placeholder="Search..."
                 value={searchTerm}
-                onChange={handleInputChange} />
+                onChange={handleInputChange} 
+                />
+                <button onClick={deleteSearchBtn} className="searchDeleteBtn">x</button>
         </div>
     )
 }

@@ -149,3 +149,12 @@ body {
     border: none;
     
 }
+
+.searchDeleteBtn {
+    background-color: white;
+    border: none;
+    color: red;
+    position: relative;
+    left: -20px;
+    
+}

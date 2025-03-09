@@ -24,6 +24,7 @@ function Darkmode() {
                     onClick={mode ? toggleMode : toggleMode}>
                     {mode ? "Lightmode" : "Darkmode"}
                 </button>
+               
                 {/* Rest of your app */}
             </div>
         </>
