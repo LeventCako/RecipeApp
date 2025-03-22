@@ -16,6 +16,7 @@ function Searchbar({ onFilterRecipes }) {
     };
 
 
+    /* Hotkey that when triggered , will delete the search term */
     useEffect(() => {
         const handleKeyDown = (event) => {
             if (event.ctrlKey && event.key === "ö") {

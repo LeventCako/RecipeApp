@@ -158,3 +158,45 @@ body {
     left: -20px;
     
 }
+
+
+.usernameComment {
+    font-size: 12px;
+    border-radius: 6px;
+    border: 1.5px solid grey;
+    margin-bottom: 5px;
+    margin-top: 30%;
+    display: block;
+
+}
+
+.commentBar {
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 8px; /* Adds padding inside the comment bar */
+    display: block; /* Makes sure it lays underneath the username */
+    margin-bottom: 5px;
+}
+
+.submitCommentBtn {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 5px 10px; /* Padding for a larger, clickable button */
+    font-size: 12px; /* A readable font size */
+    border: none; /* Remove border for a clean look */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor to indicate it's clickable */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+
+}
+
+.submitCommentBtn:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+    transform: scale(1.05); /* Subtle zoom effect */
+}
+
+.submitCommentBtn:active {
+    background-color: #3e8e41; /* Even darker green when clicked */
+    transform: scale(0.95); /* Slightly smaller to simulate a press effect */
+}

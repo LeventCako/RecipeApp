@@ -3,6 +3,10 @@ import React from "react";
 import Searchbar from "./Searchbar";
 import recipes from './recipeData.jsx';
 import { useRef } from "react";
+import CommentList from "./commentList.jsx";
+import CommentForm from "./commentForm.jsx";
+
+
 
 function RecipeList({ onSelectRecipe }) {
    
@@ -12,7 +16,8 @@ function RecipeList({ onSelectRecipe }) {
     const [favorites, setFavorites] = useState([]);
     const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
     const myRef = useRef(null);
-
+    const [comments, setComments] = useState([]);
+    
     const handleRecipeClick = (recipe) => {
         if (selectedRecipe && selectedRecipe.id === recipe.id) {
             setSelectedRecipe(null);
@@ -64,6 +69,12 @@ function RecipeList({ onSelectRecipe }) {
         } 
        
     }
+
+
+    const handleAddComment = (newComment) => {
+        setComments([...comments, newComment]);
+      };
+    
 
     return (
         <>
@@ -125,6 +136,8 @@ function RecipeList({ onSelectRecipe }) {
                                 <li key={index}>{instruction}</li>
                             ))}
                         </ul>
+                        <CommentForm onAddComment={handleAddComment}></CommentForm>
+                        <CommentList comments={comments}></CommentList>
                     </div>
                 )}
             </div>
