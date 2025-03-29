@@ -5,19 +5,20 @@ import recipes from './recipeData.jsx';
 import { useRef } from "react";
 import CommentList from "./commentList.jsx";
 import CommentForm from "./commentForm.jsx";
+import commentData from "./commentData.jsx";
 
 
 
 function RecipeList({ onSelectRecipe }) {
-   
+
 
     const [selectedRecipe, setSelectedRecipe] = useState(null);
     const [filteredRecipes, setFilteredRecipes] = useState(recipes); // Initial state with all recipes
     const [favorites, setFavorites] = useState([]);
     const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
     const myRef = useRef(null);
-    const [comments, setComments] = useState([]);
-    
+    const [comments, setComments] = useState(commentData);
+
     const handleRecipeClick = (recipe) => {
         if (selectedRecipe && selectedRecipe.id === recipe.id) {
             setSelectedRecipe(null);
@@ -47,7 +48,7 @@ function RecipeList({ onSelectRecipe }) {
     function deleteFavorite(itemId) {
         // Filter out the item with the given id from the favorites list
         setFavorites(favorites.filter(fav => fav.id !== itemId));
-       
+
     }
 
     function deleteAllFavorite() {
@@ -59,67 +60,73 @@ function RecipeList({ onSelectRecipe }) {
         setIsFavoritesOpen(!isFavoritesOpen);
     }
 
-    
-       
-    
+
+
+
 
     const scrollToRecipeIngredients = () => {
-        if(myRef.current) {
+        if (myRef.current) {
             myRef.current.scrollIntoView({ behavior: 'smooth' });
-        } 
-       
+        }
+
     }
 
 
     const handleAddComment = (newComment) => {
         setComments([...comments, newComment]);
-      };
-    
+    };
+
+
+    const closeFavBox = () => {
+        setIsFavoritesOpen(false);
+    }
+
 
     return (
         <>
-       
+
             <header className="Header">
                 <div className="HeaderItems">
                     <Searchbar onFilterRecipes={handleFilterRecipes} />
-                    
+
                 </div>
                 <div>
-                <h2 className="favorites" title="Favorites" onClick={openFavorites}>💟</h2>
+                    <h2 className="favorites" title="Favorites" onClick={openFavorites}>💟</h2>
                 </div>
-               
+
             </header>
             <div className="App">
                 <h1>Recipe App</h1>
                 <div className={`favorites-box ${isFavoritesOpen ? 'show' : ''}`}>
+                    <button onClick={closeFavBox} className="closeFavBoxBtn">X</button>
                     <button onClick={deleteAllFavorite}>Delete All</button>
-                <ul className="favoriteRecipes">
-                    {favorites.map(fav => (
-                        <li key={fav.id}>{fav.name}
-                         <button className="deleteBtnFav" onClick={() => deleteFavorite(fav.id)}  >X</button></li>
-                        
-                    ))}
-                    
-                </ul>
+                    <ul className="favoriteRecipes">
+                        {favorites.map(fav => (
+                            <li key={fav.id}>{fav.name}
+                                <button className="deleteBtnFav" onClick={() => deleteFavorite(fav.id)}  >X</button></li>
+
+                        ))}
+
+                    </ul>
                 </div>
-               
-                
-                
+
+
+
                 <h2>All Recipes:</h2>
                 <ul>
                     {filteredRecipes.map(recipe => (
                         <li className="recipe-item" key={recipe.id}
                             onClick={() => handleRecipeClick(recipe)}>
                             {recipe.name}
-                           
+
                             <button className="FavoriteBtn" onClick={() => toggleFavorite(recipe)}>
                                 {favorites.some(fav => fav.id === recipe.id) ? "💔" : "❤️"}
                             </button>
-                            
+
                         </li>
-                        
+
                     ))}
-                     
+
                 </ul>
                 {selectedRecipe && (
                     <div ref={myRef}>
@@ -136,8 +143,9 @@ function RecipeList({ onSelectRecipe }) {
                                 <li key={index}>{instruction}</li>
                             ))}
                         </ul>
-                        <CommentForm onAddComment={handleAddComment}></CommentForm>
-                        <CommentList comments={comments}></CommentList>
+                        <CommentForm  onAddComment={(comment) => handleAddComment({ ...comment, recipeId: recipes.id })}></CommentForm>
+                        <CommentList comments={comments.filter(comment => comment.recipeId === recipes.id)}></CommentList>
+                       
                     </div>
                 )}
             </div>
